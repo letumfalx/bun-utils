@@ -1,0 +1,3 @@
+inside/inside.txt
+
+should have `text/plain` content type
