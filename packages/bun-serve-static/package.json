@@ -1,6 +1,6 @@
 {
   "name": "@letumfalx/bun-serve-static",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A middleware for Bun.serve() that adds static file serving capabilities to your server configuration.",
   "license": "MIT",
   "repository": {
