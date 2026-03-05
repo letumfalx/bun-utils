@@ -1,6 +1,11 @@
 {
-  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-jsdoc"],
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-tailwindcss"
+  ],
   "endOfLine": "lf",
   "organizeImportsSkipDestructiveCodeActions": false,
-  "trailingComma": "es5"
+  "trailingComma": "es5",
+  "tailwindFunctions": ["clsx", "cn"]
 }

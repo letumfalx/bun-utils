@@ -1,0 +1,56 @@
+{
+  "name": "@letumfalx/bun-serve-socketio",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/letumfalx/bun-utils.git",
+    "directory": "packages/bun-serve-socketio"
+  },
+  "author": {
+    "name": "letum",
+    "email": "dletumfalx@gmail.com",
+    "url": "https://github.com/letumfalx"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "main": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "default": "./dist/esm/index.js",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "npm-run-all --parallel build:*",
+    "build:cjs": "bun build --format=cjs --outdir=dist/cjs --outfile=index.js --packages=external --target=bun ./index.ts",
+    "build:esm": "bun build --format=esm --outdir=dist/esm --outfile=index.js --packages=external --target=bun ./index.ts",
+    "build:types": "tsc --project tsconfig.build.json",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "type:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@types/bun": "^1.3.9",
+    "@types/debug": "^4.1.12",
+    "eslint": "^10.0.0",
+    "npm-run-all2": "^8.0.4",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@socket.io/bun-engine": "^0.1.0",
+    "socket.io": "^4.8.0"
+  }
+}
