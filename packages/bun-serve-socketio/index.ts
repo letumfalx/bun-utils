@@ -17,6 +17,7 @@ export type RegisterSocketEventFunction<
 ) => void;
 
 type BaseWithSocketIOOPtions = {
+  /** The additional SocketIO server options. */
   socketIO?: undefined | ConstructorParameters<typeof Engine>[0];
 };
 
@@ -25,6 +26,7 @@ export type NamespacedWithSocketIOOptions<
   TEmitEvents extends EventMap = EventMap,
   TNamespace extends string = string,
 > = BaseWithSocketIOOPtions & {
+  /** Registers multiple namespace. */
   register:
     | Record<
         TNamespace,
@@ -40,6 +42,7 @@ export type WithSocketIOOptions<
   TListenEvents extends EventMap = EventMap,
   TEmitEvents extends EventMap = EventMap,
 > = BaseWithSocketIOOPtions & {
+  /** Register to the default namespace. */
   register: RegisterSocketEventFunction<TListenEvents, TEmitEvents>;
 };
 
@@ -50,41 +53,55 @@ export interface WithSocketIOReturnType {
 }
 
 /**
- * Creates a Socket.IO server integrated with Bun's serve options.
+ * Integrates a Socket.IO server with Bun's HTTP server options.
  *
  * @example
  *   ```ts
- *   // Single namespace example
  *   Bun.serve(
- *      withSocketIO({
- *        register: (socket, io) => {
- *          socket.on('message', (data) => socket.emit('response', data));
- *        }
- *      })({
- *        fetch: () => new Response(null, { status: 404 }),
- *      })
- *   );
- *
- *   // Multiple namespaces example
- *   Bun.serve(
- *      withSocketIO({
- *        register: {
- *          '/chat': (socket, io) => { ... },
- *          '/notifications': (socket, io) => { ... }
- *        }
- *      })({
- *        fetch: () => new Response(null, { status: 404 }),
- *      })
+ *     withSocketIO({
+ *       register: (socket, io) => {
+ *         socket.on('message', (data) => {
+ *           socket.emit('response', data);
+ *         });
+ *       }
+ *     })({
+ *       fetch: () => new Response(null, { status: 404 }),
+ *     })
  *   );
  *   ```;
  *
- * @param options - Configuration options for Socket.IO integration
- * @param options.register - Event registration function(s). Can be a single
- *   function for the default namespace, or a Record/Map of namespace-specific
- *   functions
- * @param options.socketIO - Optional Socket.IO engine configuration
- * @returns A function that accepts Bun serve options and returns enhanced serve
- *   options with Socket.IO support
+ * @param options - Configuration for Socket.IO integration, including event
+ *   registration.
+ * @returns A function that augments Bun.Serve.Options with Socket.IO support.
+ */
+export function withSocketIO<
+  TListenEvents extends EventMap = EventMap,
+  TEmitEvents extends EventMap = EventMap,
+>(
+  options: WithSocketIOOptions<TListenEvents, TEmitEvents>
+): WithSocketIOReturnType;
+/**
+ * Integrates a Socket.IO server with Bun's HTTP server options, supporting
+ * multiple namespaces.
+ *
+ * @example
+ *   ```ts
+ *   Bun.serve(
+ *     withSocketIO({
+ *       register: {
+ *         '/chat': (socket, io) => { ... },
+ *         '/notifications': (socket, io) => { ... }
+ *       }
+ *     })({
+ *       fetch: () => new Response(null, { status: 404 }),
+ *     })
+ *   );
+ *   ```;
+ *
+ * @param options - Configuration for Socket.IO integration, allowing
+ *   registration of event handlers for multiple namespaces.
+ * @returns A function that augments Bun.Serve.Options with Socket.IO support
+ *   for the specified namespaces.
  */
 export function withSocketIO<
   TListenEvents extends EventMap = EventMap,
@@ -92,12 +109,6 @@ export function withSocketIO<
   TNamespace extends string = string,
 >(
   options: NamespacedWithSocketIOOptions<TListenEvents, TEmitEvents, TNamespace>
-): WithSocketIOReturnType;
-export function withSocketIO<
-  TListenEvents extends EventMap = EventMap,
-  TEmitEvents extends EventMap = EventMap,
->(
-  options: WithSocketIOOptions<TListenEvents, TEmitEvents>
 ): WithSocketIOReturnType;
 export function withSocketIO<
   TListenEvents extends EventMap = EventMap,

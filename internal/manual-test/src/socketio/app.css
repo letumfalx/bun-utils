@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* @layer components {
+  .btn {
+    @apply cursor-pointer rounded-full border border-gray-300 bg-gray-200 px-4 py-2 text-lg font-semibold text-gray-700 outline-2 outline-transparent transition-colors focus-within:bg-gray-300 focus-within:outline-2 focus-within:outline-gray-400 hover:bg-gray-300 focus:bg-gray-300 focus:outline-gray-400 disabled:opacity-40;
+  }
+
+  .timestamp {
+    @apply shrink-0 grow-0 font-semibold;
+  }
+
+  .output-entry {
+    @apply flex flex-row gap-1;
+  }
+
+  .output-entry:first-child {
+    @apply mt-auto;
+  }
+} */
