@@ -28,13 +28,13 @@
     "type:check": "turbo run type:check"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.8",
+    "@changesets/cli": "^2.30.0",
     "husky": "^9.1.7",
     "prettier": "^3.8.1",
     "prettier-plugin-jsdoc": "^1.8.0",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.1",
-    "turbo": "^2.8.12"
+    "turbo": "^2.8.13"
   }
 }
