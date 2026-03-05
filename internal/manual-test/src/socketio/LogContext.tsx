@@ -37,7 +37,7 @@ type LogContent =
       value: Error | string;
     };
 
-const MAX_DISPLAYED_LOGS = 3;
+const MAX_DISPLAYED_LOGS = 100;
 
 const LogContext = createContext<null | {
   logs: (LogContent & { timestamp: string })[];
